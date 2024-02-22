@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B077D82B868C3500289E20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B077D72B868C3500289E20 /* GoogleService-Info.plist */; };
+		04B077DA2B868D1600289E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B077D92B868D1600289E20 /* AppDelegate.swift */; };
 		04E915202B8510BE00DE609A /* BookAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9151F2B8510BE00DE609A /* BookAppApp.swift */; };
 		04E915222B8510BE00DE609A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E915212B8510BE00DE609A /* ContentView.swift */; };
 		04E915242B8510BF00DE609A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E915232B8510BF00DE609A /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04B077D72B868C3500289E20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		04B077D92B868D1600289E20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04E9151C2B8510BE00DE609A /* BookApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E9151F2B8510BE00DE609A /* BookAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookAppApp.swift; sourceTree = "<group>"; };
 		04E915212B8510BE00DE609A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 			children = (
 				04E915312B851A9F00DE609A /* Resources */,
 				04E9151F2B8510BE00DE609A /* BookAppApp.swift */,
+				04B077D92B868D1600289E20 /* AppDelegate.swift */,
 				04E915212B8510BE00DE609A /* ContentView.swift */,
 			);
 			path = App;
@@ -82,6 +87,7 @@
 		04E915312B851A9F00DE609A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				04B077D72B868C3500289E20 /* GoogleService-Info.plist */,
 				04E915362B85252B00DE609A /* Info.plist */,
 				04E915232B8510BF00DE609A /* Assets.xcassets */,
 				04E915252B8510BF00DE609A /* Preview Content */,
@@ -99,6 +105,7 @@
 				04E915182B8510BE00DE609A /* Sources */,
 				04E915192B8510BE00DE609A /* Frameworks */,
 				04E9151A2B8510BE00DE609A /* Resources */,
+				04E915372B868B4A00DE609A /* Upload dSYMs via Crashlytics Script */,
 			);
 			buildRules = (
 			);
@@ -152,16 +159,43 @@
 			files = (
 				04E915272B8510BF00DE609A /* Preview Assets.xcassets in Resources */,
 				04E915242B8510BF00DE609A /* Assets.xcassets in Resources */,
+				04B077D82B868C3500289E20 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04E915372B868B4A00DE609A /* Upload dSYMs via Crashlytics Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(BUILT_PRODUCTS_DIR)/$(EXECUTABLE_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+			);
+			name = "Upload dSYMs via Crashlytics Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		04E915182B8510BE00DE609A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B077DA2B868D1600289E20 /* AppDelegate.swift in Sources */,
 				04E915222B8510BE00DE609A /* ContentView.swift in Sources */,
 				04E915202B8510BE00DE609A /* BookAppApp.swift in Sources */,
 			);
@@ -296,6 +330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"App/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = LGLWR32YP7;
 				ENABLE_PREVIEWS = YES;
@@ -311,7 +346,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hennadii.knyzhnyk.BookApp;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-Xlinker",
+					"-no_warn_duplicate_libraries",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.books.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -345,7 +385,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hennadii.knyzhnyk.BookApp;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-Xlinker",
+					"-no_warn_duplicate_libraries",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.books.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

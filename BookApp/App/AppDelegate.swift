@@ -1,8 +1,16 @@
-//
-//  AppDelegate.swift
-//  BookApp
-//
-//  Created by Hena Knyzhnyk on 21.02.2024.
-//
+import SwiftUI
+import Presentation
+import Firebase
 
-import Foundation
+public final class AppDelegate: NSObject, UIApplicationDelegate {
+
+    public func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+
+        FirebaseApp.configure()
+
+        return true
+    }
+}

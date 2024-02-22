@@ -25,6 +25,10 @@ let package = Package(
         .library(name: domain, targets: [domain]),
         .library(name: presentation, targets: [presentation]),
     ],
+    dependencies: [
+        // Firebase
+        .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.21.0"),
+    ],
     targets: [
         .target(name: resources, resources: [.process("Fonts"), .process("Assets")]),
         .target(name: swiftExtensions),
@@ -62,6 +66,7 @@ let package = Package(
                 .byName(name: uiStyleKit),
                 .byName(name: appExtensions),
                 .byName(name: domain),
+                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk")
             ]
         ),
     ]
