@@ -1,5 +1,4 @@
 import SwiftUI
-import Presentation
 import Firebase
 
 public final class AppDelegate: NSObject, UIApplicationDelegate {

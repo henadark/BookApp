@@ -1,13 +1,15 @@
 import SwiftUI
+import Presentation
 
 @main
-struct BookAppApp: App {
+struct BookApp: App {
 
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
     var body: some Scene {
+        let rootFlow = Root.Flow.build()
         WindowGroup {
-            ContentView()
+            rootFlow
         }
     }
 }
