@@ -1,5 +1,6 @@
 import SwiftUI
 import UIStyleKit
+import AppExtensions
 
 extension Root {
 
@@ -8,10 +9,24 @@ extension Root {
         @StateObject public var viewModel: Root.SplashViewModel
 
         internal var body: some View {
-
-            VStack {
-                Text("Hello")
+            ZStack {
+                backgroundView
+                VStack(spacing: 12) {
+                    Text("Book App")
+                        .largeTitle_SecondaryPinkTextStyle()
+                }
             }
+        }
+
+        private var backgroundView: some View {
+            Group {
+                Image("background", bundle: Bundle.swiftUIPreviewsCompatibleModule)
+                    .resizable()
+                Image("heart", bundle: Bundle.swiftUIPreviewsCompatibleModule)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            }
+            .ignoresSafeArea()
         }
     }
 }
