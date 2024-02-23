@@ -1,5 +1,4 @@
-import Foundation
-import Combine
+import SwiftUI
 import Domain
 import Helpers
 
@@ -15,7 +14,12 @@ extension Root {
         internal let didFinish: FinishCompletion
 
         // Helpers
-        private var cancellableSet = Set<AnyCancellable>()
+        private let downloadTimeInterval = 2_000
+        private var elapsedTimeInterval: Double = 0
+        private let timeStep = 100
+
+        // UI
+        @Published internal var progress: Double = 0
 
         // MARK: Init
 
@@ -25,18 +29,19 @@ extension Root {
             self.didFinish = didFinish
         }
 
-        deinit {
-            cancellableSet.forEach { $0.cancel() }
-        }
-
         // MARK: Actions
 
-        internal func onViewDidLoad() {
+        @MainActor
+        internal func startLoading() async {
+            for _ in 1 ... downloadTimeInterval / timeStep {
+                try? await Task.sleep(until: .now.advanced(by: .milliseconds(timeStep)), clock: .continuous)
+                elapsedTimeInterval += Double(timeStep)
+                let newProgress = elapsedTimeInterval / Double(downloadTimeInterval)
+                withAnimation {
+                    progress = newProgress
+                }
+            }
         }
-
-        internal func onAppear() {}
-
-        internal func onDisappear() {}
 
         // MARK: Mock
 

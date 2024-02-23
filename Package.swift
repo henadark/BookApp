@@ -3,6 +3,7 @@
 
 import PackageDescription
 
+let resources = "Resources"
 let uiStyleKit = "UIStyleKit"
 let helpers = "Helpers"
 let swiftExtensions = "SwiftExtensions"
@@ -10,7 +11,6 @@ let appExtensions = "AppExtensions"
 let core = "Core"
 let domain = "Domain"
 let presentation = "Presentation"
-let resources = "Resources"
 
 let package = Package(
     name: "BookApp",

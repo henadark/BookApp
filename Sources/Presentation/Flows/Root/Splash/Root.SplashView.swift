@@ -17,7 +17,14 @@ extension Root {
                         .largeTitle_SecondaryPinkTextStyle()
                     Text("Welcome to Book App")
                         .title_Gray4TextStyle()
+                    ProgressSliderView(progress: $viewModel.progress)
+                        .padding(.top, 16)
                 }
+                .padding(.horizontal, 50)
+                .padding(.bottom, 50)
+            }
+            .task {
+                await viewModel.startLoading()
             }
         }
 
