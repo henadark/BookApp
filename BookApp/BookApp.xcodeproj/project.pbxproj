@@ -24,7 +24,6 @@
 		04E915232B8510BF00DE609A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04E915262B8510BF00DE609A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		04E9152D2B85115700DE609A /* BookApp */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BookApp; path = ..; sourceTree = "<group>"; };
-		04E915362B85252B00DE609A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +86,6 @@
 			isa = PBXGroup;
 			children = (
 				04B077D72B868C3500289E20 /* GoogleService-Info.plist */,
-				04E915362B85252B00DE609A /* Info.plist */,
 				04E915232B8510BF00DE609A /* Assets.xcassets */,
 				04E915252B8510BF00DE609A /* Preview Content */,
 			);

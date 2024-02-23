@@ -1,6 +1,7 @@
 import SwiftUI
 import UIStyleKit
 import AppExtensions
+import Helpers
 
 extension Root {
 
@@ -14,6 +15,8 @@ extension Root {
                 VStack(spacing: 12) {
                     Text("Book App")
                         .largeTitle_SecondaryPinkTextStyle()
+                    Text("Welcome to Book App")
+                        .title_Gray4TextStyle()
                 }
             }
         }
@@ -34,7 +37,9 @@ extension Root {
 #Preview {
 
     let viewModel = Root.SplashViewModel.mock
-    return Root.SplashView(viewModel: viewModel)
+    return CommonPreview {
+        Root.SplashView(viewModel: viewModel)
+    }
 }
 
 
