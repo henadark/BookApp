@@ -33,12 +33,19 @@ extension Root {
 
         @MainActor
         internal func startLoading() async {
+
             for _ in 1 ... downloadTimeInterval / timeStep {
+
                 try? await Task.sleep(until: .now.advanced(by: .milliseconds(timeStep)), clock: .continuous)
+
                 elapsedTimeInterval += Double(timeStep)
                 let newProgress = elapsedTimeInterval / Double(downloadTimeInterval)
+
                 withAnimation {
                     progress = newProgress
+                } completion: { [weak self] in
+                    guard newProgress == 1 else { return }
+                    self?.didFinish()
                 }
             }
         }

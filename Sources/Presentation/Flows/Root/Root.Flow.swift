@@ -57,7 +57,7 @@ extension Root {
             case .splash:
                 splashView()
             case .home:
-                splashView()
+                homeFlow()
             }
         }
 
@@ -67,6 +67,10 @@ extension Root {
                     currentFlow = .home
                 }
             }
+        }
+
+        private func homeFlow() -> some View {
+            flowFactory.home(startScreen: .main) {}
         }
     }
 }

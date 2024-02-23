@@ -16,5 +16,15 @@ extension Root {
         }
 
         // MARK: Flows
+
+        internal func home(startScreen: Home.Flow.Screen, didFinish: @escaping Home.Flow.FinishCompletion) -> some View {
+            return Home.Flow(
+                startScreen: startScreen,
+                viewFactory: Home.ViewFactory(
+                    viewModelFactory: Home.ViewModelFactory(services: services)
+                ),
+                didFinish: didFinish
+            )
+        }
     }
 }
