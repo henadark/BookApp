@@ -51,12 +51,16 @@ let package = Package(
             ]
         ),
         .target(
-            name: core
+            name: core,
+            dependencies: [
+                .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
+            ]
         ),
         .target(
             name: domain,
             dependencies: [
                 .byName(name: core),
+                .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
             ]
         ),
         .target(
