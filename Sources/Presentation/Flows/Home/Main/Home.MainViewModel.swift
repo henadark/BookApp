@@ -2,6 +2,8 @@ import Foundation
 import Combine
 import Domain
 import Helpers
+import Core
+import Domain
 
 extension Home {
 
@@ -12,6 +14,7 @@ extension Home {
         // MARK: Stored Properties
 
         // Domain
+        private let booksService: BooksServiceProtocol
         internal let didFinish: FinishCompletion
 
         // UI
@@ -22,8 +25,10 @@ extension Home {
         // MARK: Init
 
         internal init(
+            booksService: BooksServiceProtocol,
             didFinish: @escaping FinishCompletion
         ) {
+            self.booksService = booksService
             self.didFinish = didFinish
         }
 
@@ -44,9 +49,9 @@ extension Home {
 
         internal class var mock: MainViewModel{
             MainViewModel(
+                booksService: MockBooksService(),
                 didFinish: {}
             )
         }
     }
 }
-

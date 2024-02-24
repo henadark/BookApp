@@ -20,6 +20,7 @@ extension Root {
 
         internal func splashViewModel(didFinish: @escaping SplashViewModel.FinishCompletion) -> SplashViewModel {
             return SplashViewModel(
+                booksService: services.booksService,
                 didFinish: didFinish
             )
         }

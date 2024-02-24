@@ -1,7 +1,7 @@
 import Foundation
 import FirebaseRemoteConfig
 
-public final class DataProvider: DataProviderProtocol {
+public actor DataProvider: DataProviderProtocol {
 
     // MARK: Stored Properties
 

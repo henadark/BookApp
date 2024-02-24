@@ -19,6 +19,7 @@ extension Home {
 
         internal func mainViewModel(didFinish: @escaping MainViewModel.FinishCompletion) -> MainViewModel {
             return MainViewModel(
+                booksService: services.booksService,
                 didFinish: didFinish
             )
         }

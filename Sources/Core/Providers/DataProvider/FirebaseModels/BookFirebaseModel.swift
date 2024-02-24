@@ -8,7 +8,7 @@ public struct BookFirebaseModel: Decodable {
     public let name: String
     public let author: String
     public let summary: String
-    public let genre: String
+    public let genre: BookGenreFirebaseModel
     public let coverURL: String
     public let views: String
     public let likes: String
@@ -21,7 +21,7 @@ public struct BookFirebaseModel: Decodable {
         name: String,
         author: String,
         summary: String,
-        genre: String,
+        genre: BookGenreFirebaseModel,
         coverURL: String,
         views: String,
         likes: String,

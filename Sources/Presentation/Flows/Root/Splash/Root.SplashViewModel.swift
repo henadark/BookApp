@@ -11,12 +11,8 @@ extension Root {
         // MARK: Stored Properties
 
         // Domain
+        private let booksService: BooksServiceProtocol
         internal let didFinish: FinishCompletion
-
-        // Helpers
-        private let downloadTimeInterval = 2_000
-        private var elapsedTimeInterval: Double = 0
-        private let timeStep = 100
 
         // UI
         @Published internal var progress: Double = 0
@@ -24,8 +20,10 @@ extension Root {
         // MARK: Init
 
         internal init(
+            booksService: BooksServiceProtocol,
             didFinish: @escaping FinishCompletion
         ) {
+            self.booksService = booksService
             self.didFinish = didFinish
         }
 
@@ -34,18 +32,22 @@ extension Root {
         @MainActor
         internal func startLoading() async {
 
-            for _ in 1 ... downloadTimeInterval / timeStep {
+            async let animateProgressTask: Void = animateProgreess(1)
+            async let fetchBooksTask: Void = try booksService.fetchBooks()
+            do {
+                let (_, _) = try await (animateProgressTask, fetchBooksTask)
+                didFinish()
+            } catch {}
+        }
 
-                try? await Task.sleep(until: .now.advanced(by: .milliseconds(timeStep)), clock: .continuous)
+        @MainActor
+        private func animateProgreess(_ newProgress: Double) async {
 
-                elapsedTimeInterval += Double(timeStep)
-                let newProgress = elapsedTimeInterval / Double(downloadTimeInterval)
-
-                withAnimation {
+            await withUnsafeContinuation { (continuation: UnsafeContinuation<Void, Never>) in
+                withAnimation(.easeInOut(duration: 2)) {
                     progress = newProgress
-                } completion: { [weak self] in
-                    guard newProgress == 1 else { return }
-                    self?.didFinish()
+                } completion: {
+                    continuation.resume()
                 }
             }
         }
@@ -54,6 +56,7 @@ extension Root {
 
         internal class var mock: SplashViewModel{
             SplashViewModel(
+                booksService: MockBooksService(),
                 didFinish: {}
             )
         }
