@@ -28,9 +28,12 @@ let package = Package(
     dependencies: [
         // Firebase
         .package(url: "https://github.com/firebase/firebase-ios-sdk.git", from: "10.21.0"),
+
+        // Kingfisher
+        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "7.11.0")
     ],
     targets: [
-        .target(name: resources, resources: [.process("Fonts"), .process("Assets")]),
+        .target(name: resources, resources: [.process("Fonts"), .process("Assets"), .process("MockData")]),
         .target(name: swiftExtensions),
         .target(
             name: uiStyleKit,
@@ -53,14 +56,14 @@ let package = Package(
         .target(
             name: core,
             dependencies: [
-                .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseRemoteConfigSwift", package: "firebase-ios-sdk"),
             ]
         ),
         .target(
             name: domain,
             dependencies: [
                 .byName(name: core),
-                .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
+                .product(name: "FirebaseRemoteConfigSwift", package: "firebase-ios-sdk"),
             ]
         ),
         .target(
@@ -70,7 +73,8 @@ let package = Package(
                 .byName(name: uiStyleKit),
                 .byName(name: appExtensions),
                 .byName(name: domain),
-                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk")
+                .product(name: "FirebaseCrashlytics", package: "firebase-ios-sdk"),
+                .product(name: "Kingfisher", package: "Kingfisher")
             ]
         ),
     ]

@@ -23,5 +23,12 @@ extension Home {
                 didFinish: didFinish
             )
         }
+
+        internal func bookDetailsViewModel(didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> BookDetailsViewModel {
+            return BookDetailsViewModel(
+                booksService: services.booksService,
+                didFinish: didFinish
+            )
+        }
     }
 }

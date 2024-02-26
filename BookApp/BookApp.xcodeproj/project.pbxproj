@@ -10,6 +10,7 @@
 		04B077D82B868C3500289E20 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B077D72B868C3500289E20 /* GoogleService-Info.plist */; };
 		04B077DA2B868D1600289E20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B077D92B868D1600289E20 /* AppDelegate.swift */; };
 		04B078152B87CCE500289E20 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 04B078142B87CCE500289E20 /* FirebaseCrashlytics */; };
+		04DA4FFE2B8A4F9E00DF5A26 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 04DA4FFD2B8A4F9E00DF5A26 /* FirebaseRemoteConfig */; };
 		04E915202B8510BE00DE609A /* BookApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9151F2B8510BE00DE609A /* BookApp.swift */; };
 		04E915242B8510BF00DE609A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E915232B8510BF00DE609A /* Assets.xcassets */; };
 		04E915272B8510BF00DE609A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04E915262B8510BF00DE609A /* Preview Assets.xcassets */; };
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04DA4FFE2B8A4F9E00DF5A26 /* FirebaseRemoteConfig in Frameworks */,
 				04E915302B85163700DE609A /* Presentation in Frameworks */,
 				04B078152B87CCE500289E20 /* FirebaseCrashlytics in Frameworks */,
 			);
@@ -112,6 +114,7 @@
 			packageProductDependencies = (
 				04E9152F2B85163700DE609A /* Presentation */,
 				04B078142B87CCE500289E20 /* FirebaseCrashlytics */,
+				04DA4FFD2B8A4F9E00DF5A26 /* FirebaseRemoteConfig */,
 			);
 			productName = BookApp;
 			productReference = 04E9151C2B8510BE00DE609A /* BookApp.app */;
@@ -441,6 +444,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04B077DD2B87CA5900289E20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		04DA4FFD2B8A4F9E00DF5A26 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04B077DD2B87CA5900289E20 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
 		};
 		04E9152F2B85163700DE609A /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseRemoteConfig
+import FirebaseRemoteConfigSwift
 import Core
 
 public final class ServicesAssembly: ServicesAssemblyProtocol {

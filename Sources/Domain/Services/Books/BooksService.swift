@@ -1,5 +1,6 @@
 import Foundation
 import Core
+import Resources
 
 internal final class BooksService: Sendable, BooksServiceProtocol {
 
@@ -61,5 +62,23 @@ internal final class BooksService: Sendable, BooksServiceProtocol {
             topBannerSlides: remoteConfig.topBannerSlides,
             youWillLikeSection: remoteConfig.youWillLikeSection
         )
+    }
+
+    public var booksByGenre: BooksByGenreDomainModel {
+        get async  {
+            await repository.booksByGenre
+        }
+    }
+
+    public var topBannerSlides: [TopBannerSlideFirebaseModel] {
+        get async  {
+            await repository.topBannerSlides
+        }
+    }
+
+    public var youWillLikeSection: [Int] {
+        get async  {
+            await repository.youWillLikeSection
+        }
     }
 }

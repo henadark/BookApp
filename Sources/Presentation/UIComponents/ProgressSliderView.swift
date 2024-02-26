@@ -18,7 +18,7 @@ public struct ProgressSliderView: View {
     public init(
         progress: Binding<Double>,
         height: CGFloat = 6,
-        backgroundColor: Color = .gray6,
+        backgroundColor: Color = .gray7,
         progressColor: Color = .primaryWhite
     ) {
         self._progress = progress

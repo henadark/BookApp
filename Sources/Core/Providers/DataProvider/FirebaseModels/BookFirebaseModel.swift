@@ -1,6 +1,6 @@
 import Foundation
 
-public struct BookFirebaseModel: Decodable {
+public struct BookFirebaseModel: Decodable, Identifiable {
 
     // MARK: Stored Properties
 
@@ -37,6 +37,10 @@ public struct BookFirebaseModel: Decodable {
         self.likes = likes
         self.quotes = quotes
     }
+
+    // MARK: Helepers
+
+    public var imageBookURL: URL? { URL(string: coverURL) }
 
     // MARK: Coding Keys
 

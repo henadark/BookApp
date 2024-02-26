@@ -7,7 +7,11 @@ extension Root {
 
     internal struct SplashView: View {
 
+        // MARK: Stored Properties
+
         @StateObject public var viewModel: Root.SplashViewModel
+
+        // MARK: Body
 
         internal var body: some View {
             ZStack {
@@ -16,7 +20,7 @@ extension Root {
                     Text("Book App")
                         .largeTitle_SecondaryPinkTextStyle()
                     Text("Welcome to Book App")
-                        .title_Gray4TextStyle()
+                        .title_Gray5TextStyle()
                     ProgressSliderView(progress: $viewModel.progress)
                         .padding(.top, 16)
                 }
@@ -27,6 +31,8 @@ extension Root {
                 await viewModel.startLoading()
             }
         }
+
+        // MARK: UI Components
 
         private var backgroundView: some View {
             Group {

@@ -2,19 +2,79 @@ import SwiftUI
 import UIStyleKit
 import AppExtensions
 import Helpers
+import Domain
 
 extension Home {
 
     internal struct MainView: View {
 
+        // MARK: Stored Properties
+
         @StateObject public var viewModel: MainViewModel
 
-        internal var body: some View {
+        // MARK: Body
 
-            VStack {
-                Text("Hello")
+        internal var body: some View {
+            ZStack {
+                Color.primaryBlack
+                    .ignoresSafeArea()
+                VStack(spacing: 0) {
+                    navigationTitle
+                    scrollViewContent
+                }
             }
-            .navigationTitle("View")
+        }
+
+        // MARK: UI Components
+
+        private var navigationTitle: some View {
+            Text("Library")
+                .title2_PrimaryPinkTextStyle()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 8)
+        }
+
+        private var scrollViewContent: some View {
+            ScrollView {
+                VStack(spacing: 20) {
+                    topBanner
+                    if let books = viewModel.booksByGenre {
+                        LazyVStack(alignment: .center, spacing: 16) {
+                            ForEach(viewModel.genres) { genreType in
+                                if let books = books[genreType] {
+                                    BookSection(
+                                        title: genreType.rawValue,
+                                        rowsData: books,
+                                        onRowTap: viewModel.onBookTap(bookId:)
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private var topBanner: some View {
+            GeometryReader { proxy in
+                PageSliderView(
+                    collection: viewModel.topBannerSlides,
+                    pageIndicatorTintColor: .gray5,
+                    currentPageIndicatorTintColor: .primaryPink
+                ) { rowData in
+                    ImageBannerView(
+                        url: rowData.urlCover,
+                        width: proxy.size.width - 32,
+                        height: 160
+                    )
+                    .onTapGesture {
+                        viewModel.onBannerTap(bookId: rowData.bookID)
+                    }
+                }
+            }
+            .frame(height: 160)
+            .padding(.vertical, 20)
         }
     }
 }
@@ -28,4 +88,3 @@ extension Home {
         }
     }
 }
-

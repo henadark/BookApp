@@ -56,7 +56,7 @@ extension Root {
 
         internal class var mock: SplashViewModel{
             SplashViewModel(
-                booksService: MockBooksService(),
+                booksService: MockBooksService.mock,
                 didFinish: {}
             )
         }

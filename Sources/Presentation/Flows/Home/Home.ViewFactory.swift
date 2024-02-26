@@ -19,5 +19,9 @@ extension Home {
         internal func main(didFinish: @escaping MainViewModel.FinishCompletion) -> some View {
             return MainView(viewModel: self.viewModelFactory.mainViewModel(didFinish: didFinish))
         }
+
+        internal func bookDetails(didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> some View {
+            return BookDetailsView(viewModel: self.viewModelFactory.bookDetailsViewModel(didFinish: didFinish))
+        }
     }
 }

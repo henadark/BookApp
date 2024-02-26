@@ -14,8 +14,8 @@ extension View {
     }
 
     /// font: **Nunito Sans**, size: **24**, weight: **bold**
-    public func title_Gray4TextStyle() -> some View {
-        self.modifier(Title(color: .gray4))
+    public func title_Gray5TextStyle() -> some View {
+        self.modifier(Title(color: .gray5))
     }
 
     /// font: **Nunito Sans**, size: **20**, weight: **bold**
@@ -39,13 +39,13 @@ extension View {
     }
 
     /// font: **Nunito Sans**, size: **16**, weight: **semibold**
-    public func body_Gray5TextStyle() -> some View {
-        self.modifier(BodyText(color: .gray5))
+    public func body_Gray6TextStyle() -> some View {
+        self.modifier(BodyText(color: .gray6))
     }
 
     /// font: **Nunito Sans**, size: **14**, weight: **bold**
-    public func footnote_Gray4TextStyle() -> some View {
-        self.modifier(Footnote(color: .gray4))
+    public func footnote_Gray5TextStyle() -> some View {
+        self.modifier(Footnote(color: .gray5))
     }
 
     /// font: **Nunito Sans**, size: **14**, weight: **semibold**
@@ -54,7 +54,7 @@ extension View {
     }
 
     /// font: **Nunito Sans**, size: **12**, weight: **semibold**
-    public func caption_Gray3TextStyle() -> some View {
-        self.modifier(Caption(color: .gray3))
+    public func caption_Gray4TextStyle() -> some View {
+        self.modifier(Caption(color: .gray4))
     }
 }

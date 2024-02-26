@@ -5,7 +5,7 @@ internal struct BooksByGenreDomainModelBuilder {
 
     internal func build(from books: [BookFirebaseModel]) -> BooksByGenreDomainModel {
 
-        var booksByGenre: [BookGenreFirebaseModel: [BookFirebaseModel]] = [:]
+        var booksByGenre: BooksByGenreDomainModel = [:]
 
         BookGenreFirebaseModel.allCases.forEach { genre in
             let array = books.filter { $0.genre == genre }

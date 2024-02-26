@@ -11,6 +11,7 @@ extension Home {
         internal enum Screen: Hashable, Identifiable {
 
             case main
+            case bookDetails(bookId: Int)
 
             public var id: String { String(describing: self) }
         }
@@ -49,12 +50,23 @@ extension Home {
             switch screen {
             case .main:
                 mainView()
+            case .bookDetails:
+                bookDetailsView()
             }
         }
 
         private func mainView() -> some View {
-            viewFactory.main {
-                
+            viewFactory.main { status in
+                switch status {
+                case let .selectBook(id):
+                    push(.bookDetails(bookId: id))
+                }
+            }
+        }
+
+        private func bookDetailsView() -> some View {
+            viewFactory.bookDetails {
+                popToRoot()
             }
         }
 

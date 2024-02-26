@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TopBannerSlideFirebaseModel: Decodable {
+public struct TopBannerSlideFirebaseModel: Decodable, Identifiable {
 
     // MARK: Stored Properties
 
@@ -15,6 +15,10 @@ public struct TopBannerSlideFirebaseModel: Decodable {
         self.bookID = bookID
         self.cover = cover
     }
+
+    // MARK: Helpers
+
+    public var urlCover: URL? { URL(string: cover) }
 
     // MARK: Coding Keys
 

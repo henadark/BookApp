@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseRemoteConfig
+import FirebaseRemoteConfigSwift
 
 public actor DataProvider: DataProviderProtocol {
 

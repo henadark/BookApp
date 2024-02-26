@@ -6,18 +6,15 @@ import Domain
 
 extension Home {
 
-    internal final class MainViewModel: ObservableObject {
+    internal final class BookDetailsViewModel: ObservableObject {
 
-        public enum FinishStatus {
-            case selectBook(id: Int)
-        }
-
-        internal typealias FinishCompletion = (FinishStatus) -> Void
+        internal typealias FinishCompletion = VoidCompletion
 
         // MARK: Stored Properties
 
         // Domain
         private let booksService: BooksServiceProtocol
+//        private let bookId: Int
         internal let didFinish: FinishCompletion
 
         // UI
@@ -53,20 +50,19 @@ extension Home {
 
         // MARK: Actions
 
-        internal func onBannerTap(bookId: Int) {
-            didFinish(.selectBook(id: bookId))
+        internal func onBackButtonTap() {
+            didFinish()
         }
 
         internal func onBookTap(bookId: Int) {
-            didFinish(.selectBook(id: bookId))
         }
 
         // MARK: Mock
 
-        internal class var mock: MainViewModel{
-            MainViewModel(
+        internal class var mock: BookDetailsViewModel{
+            BookDetailsViewModel(
                 booksService: MockBooksService.mock,
-                didFinish: { _ in }
+                didFinish: { }
             )
         }
     }
