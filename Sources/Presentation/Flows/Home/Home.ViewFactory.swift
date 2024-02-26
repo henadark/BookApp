@@ -20,8 +20,8 @@ extension Home {
             return MainView(viewModel: self.viewModelFactory.mainViewModel(didFinish: didFinish))
         }
 
-        internal func bookDetails(didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> some View {
-            return BookDetailsView(viewModel: self.viewModelFactory.bookDetailsViewModel(didFinish: didFinish))
+        internal func bookDetails(bookId: Int, didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> some View {
+            return BookDetailsView(viewModel: self.viewModelFactory.bookDetailsViewModel(bookId: bookId, didFinish: didFinish))
         }
     }
 }

@@ -11,6 +11,8 @@ extension Font {
     public static let appTitle2: Font = Font.nunitoSans(.bold, size: 20, relativeTo: .title2)
     /// font: **Nunito Sans**, size: **18**, weight: **bold**
     public static let appHeadline: Font = Font.nunitoSans(.bold, size: 18, relativeTo: .headline)
+    /// font: **Nunito Sans**, size: **16**, weight: **extra bold**
+    public static let appSubheadline: Font = Font.nunitoSans(.extraBold, size: 16, relativeTo: .subheadline)
     /// font: **Nunito Sans**, size: **16**, weight: **semibold**
     public static let appBody: Font = Font.nunitoSans(.semibold, size: 16, relativeTo: .body)
     /// font: **Nunito Sans**, size: **14**, weight: **bold**
@@ -24,6 +26,7 @@ extension Font {
 
 public enum NunitoSansFontType: String, CaseIterable {
 
+    case extraBold = "NunitoSans7pt-ExtraBold"
     case bold = "NunitoSans7pt-Bold"
     case semibold = "NunitoSans7pt-SemiBold"
 }

@@ -1,10 +1,10 @@
 import Foundation
 
-public struct ProjectSettings {
+public struct ViewSettings {
 
     // MARK: Stored Properties
 
-    internal let firebaseRemoteConfigKey = "json_data"
+    internal let timeIntervalCarousel: TimeInterval = 3.0
 
     // MARK: Init
 

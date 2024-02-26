@@ -10,6 +10,7 @@ extension Root {
         // MARK: Stored Properties
 
         @StateObject public var viewModel: Root.SplashViewModel
+        @State private var showErrorMEssage: Bool = false
 
         // MARK: Body
 
@@ -21,11 +22,21 @@ extension Root {
                         .largeTitle_SecondaryPinkTextStyle()
                     Text("Welcome to Book App")
                         .title_Gray5TextStyle()
+                        .lineLimit(1)
                     ProgressSliderView(progress: $viewModel.progress)
-                        .padding(.top, 16)
+                        .padding(.top, AppPadding.x)
+                        .padding(.horizontal, 34)
                 }
-                .padding(.horizontal, 50)
+                .padding(.horizontal, AppPadding.x)
                 .padding(.bottom, 50)
+            }
+            .onChange(of: viewModel.errorMessage, { _, newValue in
+                showErrorMEssage = !newValue.isEmpty
+            })
+            .alert("Error", isPresented: $showErrorMEssage) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage)
             }
             .task {
                 await viewModel.startLoading()
@@ -36,7 +47,7 @@ extension Root {
 
         private var backgroundView: some View {
             Group {
-                Image("background", bundle: Bundle.swiftUIPreviewsCompatibleModule)
+                Image("splashBackground", bundle: Bundle.swiftUIPreviewsCompatibleModule)
                     .resizable()
                 Image("heart", bundle: Bundle.swiftUIPreviewsCompatibleModule)
                     .resizable()

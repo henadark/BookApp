@@ -69,12 +69,6 @@ internal struct PageSliderView
         let coordinator = context.coordinator
         let viewController = ViewController(delegate: coordinator, scrollDirection: .horizontal)
 
-//        let isScrollDisabled = (collections.first?.count ?? 0) < 2
-//        viewController.collectionView.isUserInteractionEnabled = !isScrollDisabled
-//        if let collection = collections.first {
-//            viewController.pageControl.numberOfPages = collection.count
-//            viewController.pageControl.isHidden = isScrollDisabled
-//        }
         viewController.pageControl.pageIndicatorTintColor = pageIndicatorTintColor
         viewController.pageControl.currentPageIndicatorTintColor = currentPageIndicatorTintColor
         updateUI(for: viewController)
@@ -229,7 +223,6 @@ extension PageSliderView {
 
         internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             totalElements = view.collections[section].count > 0 ? buffer + view.collections[section].count : 0
-            print(totalElements)
             return totalElements
         }
 

@@ -31,21 +31,24 @@ extension Home {
             Text("Library")
                 .title2_PrimaryPinkTextStyle()
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
+                .padding(.horizontal, AppPadding.x)
+                .padding(.bottom, AppPadding.xs)
         }
 
         private var scrollViewContent: some View {
             ScrollView {
                 VStack(spacing: 20) {
                     topBanner
+
                     if let books = viewModel.booksByGenre {
-                        LazyVStack(alignment: .center, spacing: 16) {
+                        LazyVStack(alignment: .center, spacing: AppPadding.x) {
                             ForEach(viewModel.genres) { genreType in
                                 if let books = books[genreType] {
                                     BookSection(
                                         title: genreType.rawValue,
                                         rowsData: books,
+                                        sectionTitleColor: .primaryWhite,
+                                        rowTitleColor: .gray6,
                                         onRowTap: viewModel.onBookTap(bookId:)
                                     )
                                 }
@@ -60,6 +63,7 @@ extension Home {
             GeometryReader { proxy in
                 PageSliderView(
                     collection: viewModel.topBannerSlides,
+                    autoScroll: viewModel.autoScrollBannerTimeInterval,
                     pageIndicatorTintColor: .gray5,
                     currentPageIndicatorTintColor: .primaryPink
                 ) { rowData in

@@ -2,5 +2,6 @@ import Foundation
 
 public protocol AppLocalSettingsServiceProtocol {
 
-    var firebaseRemoteConfigKey: String { get }
+    // View
+    var timeIntervalCarousel: TimeInterval { get }
 }

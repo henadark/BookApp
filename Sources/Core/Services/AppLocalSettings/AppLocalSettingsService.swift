@@ -4,16 +4,18 @@ public final class AppLocalSettingsService {
 
     // MARK: Stored Properties
 
-    private let projectSettings: ProjectSettings
+    private let viewSettings: ViewSettings
 
     // MARK: Init
 
-    public init(projectSettings: ProjectSettings = ProjectSettings()) {
-        self.projectSettings = projectSettings
+    public init(viewSettings: ViewSettings = ViewSettings()) {
+        self.viewSettings = viewSettings
     }
 }
 
 extension AppLocalSettingsService: AppLocalSettingsServiceProtocol {
 
-    public var firebaseRemoteConfigKey: String { projectSettings.firebaseRemoteConfigKey }
+    // View
+    public var timeIntervalCarousel: TimeInterval { viewSettings.timeIntervalCarousel }
+
 }

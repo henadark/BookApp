@@ -7,8 +7,8 @@ public final class ServicesAssembly: ServicesAssemblyProtocol {
 
     // MARK: Stored Properties
 
-    private let appLocalSettingsService: AppLocalSettingsServiceProtocol
     private let dataProvider: DataProviderProtocol
+    public let appLocalSettingsService: AppLocalSettingsServiceProtocol
     public let booksService: BooksServiceProtocol
 
     // MARK: Init
@@ -16,10 +16,7 @@ public final class ServicesAssembly: ServicesAssemblyProtocol {
     public init() {
         
         appLocalSettingsService = AppLocalSettingsService()
-        dataProvider = DataProvider(
-            remoteConfig: RemoteConfig.remoteConfig(),
-            configDataKey: appLocalSettingsService.firebaseRemoteConfigKey
-        )
+        dataProvider = DataProvider(remoteConfig: RemoteConfig.remoteConfig())
 
         booksService = BooksService(dataProvider: dataProvider)
     }

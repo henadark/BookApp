@@ -4,28 +4,24 @@ public struct RemoteConfigFirebaseModel: Decodable {
 
     // MARK: Stored Properties
 
-    public let books: [BookFirebaseModel]
-    public let topBannerSlides: [TopBannerSlideFirebaseModel]
-    public let youWillLikeSection: [Int]
+    public let main: MainBooksFirebaseModel
+    public let booksDetails: BooksDetailsFirebaseModel
 
     // MARK: Init
 
     public init(
-        books: [BookFirebaseModel],
-        topBannerSlides: [TopBannerSlideFirebaseModel],
-        youWillLikeSection: [Int]
+        main: MainBooksFirebaseModel,
+        booksDetails: BooksDetailsFirebaseModel
     ) {
-        self.books = books
-        self.topBannerSlides = topBannerSlides
-        self.youWillLikeSection = youWillLikeSection
+        self.main = main
+        self.booksDetails = booksDetails
     }
 
     // MARK: Coding Keys
 
     private enum CodingKeys: String, CodingKey {
-        
-        case books
-        case topBannerSlides = "top_banner_slides"
-        case youWillLikeSection = "you_will_like_section"
+
+        case main = "json_data"
+        case booksDetails = "details_carousel"
     }
 }

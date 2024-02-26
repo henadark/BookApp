@@ -7,13 +7,11 @@ public actor DataProvider: DataProviderProtocol {
     // MARK: Stored Properties
 
     private let remoteConfig: RemoteConfig
-    private let configDataKey: String
 
     // MARK: Init
 
-    public init(remoteConfig: RemoteConfig, configDataKey: String) {
+    public init(remoteConfig: RemoteConfig) {
         self.remoteConfig = remoteConfig
-        self.configDataKey = configDataKey
     }
 
     public func fetchBooks() async throws -> RemoteConfigFirebaseModel {
@@ -22,7 +20,7 @@ public actor DataProvider: DataProviderProtocol {
 
         switch status {
         case .successFetchedFromRemote, .successUsingPreFetchedData:
-            return try remoteConfig[configDataKey].decoded(asType: RemoteConfigFirebaseModel.self)
+            return try remoteConfig.decoded()
         case .error:
             throw CoreError.failedFetchFirebaseRemoteConfig
         @unknown default:

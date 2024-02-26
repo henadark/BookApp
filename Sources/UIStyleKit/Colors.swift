@@ -9,9 +9,13 @@ extension Color {
 
     public static var secondaryBlack: Color { Color("Secondary Black", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
 
+    public static var tertiaryBlack: Color { Color("Tertiary Black", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
+
     public static var primaryPink: Color { Color("Primary Pink", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
 
     public static var secondaryPink: Color { Color("Secondary Pink", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
+
+    public static var primaryViolet: Color { Color("Primary Violet", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
 
     public static var gray1: Color { Color("Gray 1", bundle: Bundle.swiftUIPreviewsCompatibleModule) }
 
@@ -36,9 +40,13 @@ extension ShapeStyle where Self == Color {
 
     public static var secondaryBlack: Color { .secondaryBlack }
 
+    public static var tertiaryBlack: Color { .tertiaryBlack }
+
     public static var primaryPink: Color { .primaryPink }
 
     public static var secondaryPink: Color { .secondaryPink }
+
+    public static var primaryViolet: Color { .primaryViolet }
 
     public static var gray1: Color { .gray1 }
 

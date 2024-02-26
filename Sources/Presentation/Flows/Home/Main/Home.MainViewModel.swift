@@ -23,6 +23,7 @@ extension Home {
         // UI
         @Published internal var booksByGenre: BooksByGenreDomainModel?
         @Published internal var topBannerSlides: [TopBannerSlideFirebaseModel] = []
+        internal let autoScrollBannerTimeInterval: TimeInterval
         internal var genres: [BookGenreFirebaseModel] {
             guard let booksByGenre = booksByGenre else { return [] }
             return Array(booksByGenre.keys)
@@ -32,9 +33,11 @@ extension Home {
 
         internal init(
             booksService: BooksServiceProtocol,
+            autoScrollBannerTimeInterval: TimeInterval,
             didFinish: @escaping FinishCompletion
         ) {
             self.booksService = booksService
+            self.autoScrollBannerTimeInterval = autoScrollBannerTimeInterval
             self.didFinish = didFinish
 
             Task { [weak self] in
@@ -47,8 +50,10 @@ extension Home {
         @MainActor
         private func updateData() async {
 
-            booksByGenre = await booksService.booksByGenre
-            topBannerSlides = await booksService.topBannerSlides
+            let books = await booksService.booksByGenre
+            let slides = await booksService.topBannerSlides
+            booksByGenre = books
+            topBannerSlides = slides
         }
 
         // MARK: Actions
@@ -66,6 +71,7 @@ extension Home {
         internal class var mock: MainViewModel{
             MainViewModel(
                 booksService: MockBooksService.mock,
+                autoScrollBannerTimeInterval: 3.0,
                 didFinish: { _ in }
             )
         }

@@ -7,7 +7,7 @@ internal struct ImageBannerView: View {
     internal let url: URL?
     internal let width: CGFloat
     internal let height: CGFloat
-    private let imageCorenrRadius: CGFloat = 16
+    private let imageCorenrRadius: CGFloat = AppCornerRadius.medium
 
     internal var body: some View {
         KFImage(url)
@@ -29,5 +29,5 @@ internal struct ImageBannerView: View {
         width: 350,
         height: 160
     )
-    .padding(16)
+    .padding(AppPadding.x)
 }

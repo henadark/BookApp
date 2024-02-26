@@ -20,13 +20,15 @@ extension Home {
         internal func mainViewModel(didFinish: @escaping MainViewModel.FinishCompletion) -> MainViewModel {
             return MainViewModel(
                 booksService: services.booksService,
+                autoScrollBannerTimeInterval: services.appLocalSettingsService.timeIntervalCarousel,
                 didFinish: didFinish
             )
         }
 
-        internal func bookDetailsViewModel(didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> BookDetailsViewModel {
+        internal func bookDetailsViewModel(bookId: Int, didFinish: @escaping BookDetailsViewModel.FinishCompletion) -> BookDetailsViewModel {
             return BookDetailsViewModel(
                 booksService: services.booksService,
+                selectBookId: bookId,
                 didFinish: didFinish
             )
         }

@@ -24,6 +24,11 @@ extension View {
     }
 
     /// font: **Nunito Sans**, size: **20**, weight: **bold**
+    public func title2_SecondaryBlackTextStyle() -> some View {
+        self.modifier(Title2(color: .secondaryBlack))
+    }
+
+    /// font: **Nunito Sans**, size: **20**, weight: **bold**
     public func title2_PrimaryPinkTextStyle() -> some View {
         self.modifier(Title2(color: .primaryPink))
     }

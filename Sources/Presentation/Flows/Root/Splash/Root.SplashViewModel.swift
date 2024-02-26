@@ -16,6 +16,7 @@ extension Root {
 
         // UI
         @Published internal var progress: Double = 0
+        @Published internal var errorMessage: String = ""
 
         // MARK: Init
 
@@ -37,7 +38,9 @@ extension Root {
             do {
                 let (_, _) = try await (animateProgressTask, fetchBooksTask)
                 didFinish()
-            } catch {}
+            } catch {
+                errorMessage = error.localizedDescription
+            }
         }
 
         @MainActor

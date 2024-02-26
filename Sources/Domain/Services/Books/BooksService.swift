@@ -11,17 +11,20 @@ internal final class BooksService: Sendable, BooksServiceProtocol {
         internal var booksByGenre: BooksByGenreDomainModel
         internal var topBannerSlides: [TopBannerSlideFirebaseModel]
         internal var youWillLikeSection: [Int]
+        internal var booksDetails: [BookFirebaseModel]
 
         // MARK: Init
 
         internal init(
             booksByGenre: BooksByGenreDomainModel = [:],
             topBannerSlides: [TopBannerSlideFirebaseModel] = [],
-            youWillLikeSection: [Int] = []
+            youWillLikeSection: [Int] = [],
+            booksDetails: [BookFirebaseModel] = []
         ) {
             self.booksByGenre = booksByGenre
             self.topBannerSlides = topBannerSlides
             self.youWillLikeSection = youWillLikeSection
+            self.booksDetails = booksDetails
         }
 
         // MARK: Data Updates
@@ -29,11 +32,13 @@ internal final class BooksService: Sendable, BooksServiceProtocol {
         internal func uodate(
             booksByGenre: BooksByGenreDomainModel,
             topBannerSlides: [TopBannerSlideFirebaseModel],
-            youWillLikeSection: [Int]
+            youWillLikeSection: [Int],
+            booksDetails: [BookFirebaseModel]
         ) {
             self.booksByGenre = booksByGenre
             self.topBannerSlides = topBannerSlides
             self.youWillLikeSection = youWillLikeSection
+            self.booksDetails = booksDetails
         }
     }
 
@@ -53,14 +58,16 @@ internal final class BooksService: Sendable, BooksServiceProtocol {
     public func fetchBooks() async throws {
 
         let remoteConfig = try await dataProvider.fetchBooks()
+        let mainBooks = remoteConfig.main
 
         let builder = BooksByGenreDomainModelBuilder()
-        let booksByGenre = builder.build(from: remoteConfig.books)
+        let booksByGenre = builder.build(from: mainBooks.books)
 
         await repository.uodate(
             booksByGenre: booksByGenre,
-            topBannerSlides: remoteConfig.topBannerSlides,
-            youWillLikeSection: remoteConfig.youWillLikeSection
+            topBannerSlides: mainBooks.topBannerSlides,
+            youWillLikeSection: mainBooks.youWillLikeSection,
+            booksDetails: remoteConfig.booksDetails.items
         )
     }
 
@@ -76,9 +83,26 @@ internal final class BooksService: Sendable, BooksServiceProtocol {
         }
     }
 
-    public var youWillLikeSection: [Int] {
+    public var youWillLikeSection: [BookFirebaseModel] {
         get async  {
-            await repository.youWillLikeSection
+
+            let section = await repository.youWillLikeSection
+            let books = await repository.booksByGenre.values.flatMap { $0 }
+
+            var filteredBooks = [BookFirebaseModel]()
+            section.forEach { id in
+                if let book = books.first(where: { $0.id == id }) {
+                    filteredBooks.append(book)
+                }
+            }
+
+            return filteredBooks
+        }
+    }
+
+    public var booksDetails: [BookFirebaseModel] {
+        get async  {
+            await repository.booksDetails
         }
     }
 }

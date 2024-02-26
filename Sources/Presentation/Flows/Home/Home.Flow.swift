@@ -50,8 +50,8 @@ extension Home {
             switch screen {
             case .main:
                 mainView()
-            case .bookDetails:
-                bookDetailsView()
+            case let .bookDetails(id):
+                bookDetailsView(bookId: id)
             }
         }
 
@@ -64,8 +64,8 @@ extension Home {
             }
         }
 
-        private func bookDetailsView() -> some View {
-            viewFactory.bookDetails {
+        private func bookDetailsView(bookId: Int) -> some View {
+            viewFactory.bookDetails(bookId: bookId) {
                 popToRoot()
             }
         }

@@ -1,5 +1,5 @@
 import Foundation
-import Domain
+import SwiftExtensions
 import Helpers
 import Core
 import Domain
@@ -14,24 +14,27 @@ extension Home {
 
         // Domain
         private let booksService: BooksServiceProtocol
-//        private let bookId: Int
+        private let bookId: Int
         internal let didFinish: FinishCompletion
 
         // UI
-        @Published internal var booksByGenre: BooksByGenreDomainModel?
-        @Published internal var topBannerSlides: [TopBannerSlideFirebaseModel] = []
-        internal var genres: [BookGenreFirebaseModel] {
-            guard let booksByGenre = booksByGenre else { return [] }
-            return Array(booksByGenre.keys)
-        }
+        internal private(set) var youWillLikeSection: [BookFirebaseModel] = []
+        internal private(set) var books: [BookFirebaseModel] = []
+
+        @Published internal var currentSelectedIndex: Int = 0
+        internal var currentBook: BookFirebaseModel? { books[safe: currentSelectedIndex] }
+        internal var currentAuthorName: String { books[safe: currentSelectedIndex]?.author ?? "" }
+        internal var currentBookName: String { books[safe: currentSelectedIndex]?.name ?? "" }
 
         // MARK: Init
 
         internal init(
             booksService: BooksServiceProtocol,
+            selectBookId: Int,
             didFinish: @escaping FinishCompletion
         ) {
             self.booksService = booksService
+            self.bookId = selectBookId
             self.didFinish = didFinish
 
             Task { [weak self] in
@@ -43,9 +46,14 @@ extension Home {
 
         @MainActor
         private func updateData() async {
+            
+            let booksDetails = await booksService.booksDetails
+            let section = await booksService.youWillLikeSection
+            let index = booksDetails.firstIndex(where: { $0.id == bookId }) ?? 0
 
-            booksByGenre = await booksService.booksByGenre
-            topBannerSlides = await booksService.topBannerSlides
+            books = booksDetails
+            youWillLikeSection = section
+            currentSelectedIndex = index
         }
 
         // MARK: Actions
@@ -54,7 +62,8 @@ extension Home {
             didFinish()
         }
 
-        internal func onBookTap(bookId: Int) {
+        internal func onReadNowButtonTap() {
+            print("Hello 🙂")
         }
 
         // MARK: Mock
@@ -62,6 +71,7 @@ extension Home {
         internal class var mock: BookDetailsViewModel{
             BookDetailsViewModel(
                 booksService: MockBooksService.mock,
+                selectBookId: 1,
                 didFinish: { }
             )
         }

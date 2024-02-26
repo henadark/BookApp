@@ -8,17 +8,22 @@ public final class MockBooksService: BooksServiceProtocol {
 
     public var booksByGenre: BooksByGenreDomainModel
     public var topBannerSlides: [TopBannerSlideFirebaseModel]
-    public var youWillLikeSection: [Int]
+    public var youWillLikeSection: [BookFirebaseModel]
+    public var booksDetails: [BookFirebaseModel]
 
     // MARK: Init
 
     private init() {
 
         let remoteConfig = try! JSONDecoder().decode(RemoteConfigFirebaseModel.self, from: "books")
+
+        let main = remoteConfig.main
         let builder = BooksByGenreDomainModelBuilder()
-        booksByGenre = builder.build(from: remoteConfig.books)
-        topBannerSlides = remoteConfig.topBannerSlides
-        youWillLikeSection = remoteConfig.youWillLikeSection
+        
+        booksByGenre = builder.build(from: main.books)
+        topBannerSlides = main.topBannerSlides
+        youWillLikeSection = remoteConfig.booksDetails.items
+        booksDetails = remoteConfig.booksDetails.items
     }
 
     // MARK: BooksServiceProtocol

@@ -7,5 +7,6 @@ public protocol BooksServiceProtocol {
 
     var booksByGenre: BooksByGenreDomainModel { get async }
     var topBannerSlides: [TopBannerSlideFirebaseModel] { get async }
-    var youWillLikeSection: [Int] { get async }
+    var youWillLikeSection: [BookFirebaseModel] { get async }
+    var booksDetails: [BookFirebaseModel] { get async }
 }
