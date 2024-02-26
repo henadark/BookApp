@@ -130,6 +130,7 @@ extension PageSliderView {
             self.pageControl = UIPageControl()
             self.pageControl.backgroundStyle = .minimal
             self.pageControl.allowsContinuousInteraction = false
+            self.pageControl.isUserInteractionEnabled = false
             self.pageControl.translatesAutoresizingMaskIntoConstraints = false
 
             super.init(nibName: nil, bundle: nil)
